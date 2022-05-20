@@ -33,74 +33,34 @@ End the program.
 
 ### Read image and convert it to grayscale image
 ```
+# Read image and convert it to grayscale image
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
-image = cv2.imread("road.jpeg")
-smoothImage = cv2.GaussianBlur(image,(3,3),0)
-plt.imshow(smoothImage)
-grayImage = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-cv2.imshow("Original Image",image)
-cv2.imshow("Gray Image",grayImage)
-
-
-
-
-### Find the edges in the image using canny detector and display
-
-cannyEdges = cv2.Canny(smoothImage,120,200)
-plt.imshow(cannyEdges,cmap='gray')
-plt.title('Edge Image')
-plt.xticks([])
-plt.yticks([])
+import matplotlib.pyplot as plt
+BGR_image=cv2.imread('chess.png')
+gray=cv2.cvtColor(BGR_image,cv2.COLOR_BGR2GRAY)
+img= cv2.GaussianBlur(BGR_image,(3,3),0)
+plt.imshow(img)
+# Find the edges in the image using canny detector and display
+edges1 = cv2.Canny(img,100,200)
+plt.imshow(edges1,cmap = 'gray')
+plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
 plt.show()
-
-
-### Detect points that form a line using HoughLinesP
-
-lines = cv2.HoughLinesP(cannyEdges,1,np.pi/180,threshold=80,minLineLength = 50,maxLineGap = 250)
-
-
-
-### Draw lines on the image
-
+# Detect points that form a line using HoughLinesP
+lines=cv2.HoughLinesP(edges1,1,np.pi/180, threshold=80, minLineLength=50,maxLineGap=250)
+# Draw lines on the image
 for line in lines:
-    x1, y1, x2, y2 = line [0]
-    cv2.line(smoothImage,(x1, y1),(x2, y2),(255, 0, 0),3)
-
-
-
-### Display the result
-plt.title("Hough Transform")
-plt.imshow(cannyEdges)
-plt.show()
-
-
-
-
+    x1, y1, x2, y2 = line [0] 
+    cv2.line(BGR_image,(x1, y1),(x2, y2),(210,100,200),3)
+# Display the result
+plt.imshow(BGR_image)
 ```
 ## Output
-
 ### Input image and grayscale image
-<br>
-<br>
-<br>
-<br>
-
+![](1.png)
 ### Canny Edge detector output
-<br>
-<br>
-<br>
-<br>
-
-
+![](2.png)
 ### Display the result of Hough transform
-<br>
-<br>
-<br>
-<br>
-
-
-
+![](3.png)
 ## Result:
 Thus the program is written with python and OpenCV to detect lines using Hough transform. 
