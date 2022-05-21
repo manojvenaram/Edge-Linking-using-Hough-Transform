@@ -34,11 +34,14 @@ End the program.
 ### Read image and convert it to grayscale image
 ```
 # Read image and convert it to grayscale image
+# Read image and convert it to grayscale image
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-BGR_image=cv2.imread('chess.png')
+BGR_image=cv2.imread('road.jpg')
 gray=cv2.cvtColor(BGR_image,cv2.COLOR_BGR2GRAY)
+plt.imshow(BGR_image,"original_image")
+plt.imshow(gray,"GRAY_SCALE IMAGE")
 img= cv2.GaussianBlur(BGR_image,(3,3),0)
 plt.imshow(img)
 # Find the edges in the image using canny detector and display
